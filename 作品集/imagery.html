@@ -184,9 +184,16 @@
     .sidebar-page-title{margin-bottom:0}.sidebar-page-sub{display:none}
     .series-thumb-list{flex-direction:row;gap:8px;width:auto}
     .series-thumb{width:68px}.thumb-img-wrap{aspect-ratio:1}
-    .sidebar-bottom{display:none}
+    /* on mobile show nav links as a horizontal footer row */
+    .sidebar-bottom{
+      display:flex;flex-direction:row;gap:14px;justify-content:center;
+      margin-top:0;padding-top:0;animation:none;opacity:.55;
+      width:100%;padding:6px 0 2px;border-top:1px solid rgba(168,212,230,.08)
+    }
+    .sidebar-bottom a{font-size:.72rem;opacity:1}
     .main-area{margin-left:0;padding:12px 10px 28px}
-    .strip-photo{height:170px}
+    /* fix photo cards: use 80vw so user can see there are more photos to swipe */
+    .strip-photo{height:200px;min-width:80vw}
   }
 </style>
 </head>
