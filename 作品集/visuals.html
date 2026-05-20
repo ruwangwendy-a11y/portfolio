@@ -179,7 +179,12 @@
     .left-nav-sub{display:none}
     .left-nav-divider{display:none}
     .left-nav-links{flex-direction:row;gap:14px}
-    .left-nav-bottom{display:none}
+    .left-nav-bottom{
+      display:flex;width:100%;justify-content:center;
+      animation:none;opacity:.55;
+      padding:4px 0 2px;border-top:1px solid rgba(168,212,230,.08)
+    }
+    .left-nav-bottom a{font-size:.72rem;opacity:1}
     .main-area{margin-left:0;padding:20px 16px 40px}
   }
 </style>
