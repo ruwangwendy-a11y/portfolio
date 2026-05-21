@@ -319,50 +319,67 @@
   .bottom-hint .explore-text { font-size: .52rem; letter-spacing: .2em; }
 
   /* === INFINITY DRAW === */
+  /* float in the blank above the logo, independent of flex flow */
   .infinity-wrap {
-    margin-top: 38px; z-index: 2;
-    display: flex; flex-direction: column; align-items: center; gap: 15px;
+    position: absolute;
+    top: 15%;
+    left: 50%; transform: translateX(-50%);
+    z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 13px;
+    width: max-content;
   }
 
-  .infinity-svg { display: block; overflow: visible; }
+  /* slight hand-drawn tilt */
+  .infinity-svg { display: block; overflow: visible; transform: rotate(-1.5deg); }
 
+  /* shared path base */
   .infinity-svg path {
     fill: none;
-    stroke: var(--water);
-    stroke-width: 1.25;
     stroke-linecap: round;
     stroke-linejoin: round;
-    /* pathLength="1" on the element lets us use 0-1 range */
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
     opacity: 0;
-    animation: infDraw 4s cubic-bezier(.37,0,.63,1) forwards;
-    animation-delay: 5.5s;
   }
 
-  @keyframes infDraw {
-    0%   { stroke-dashoffset: 1; opacity: 0; }
-    4%   { opacity: .5; }
-    100% { stroke-dashoffset: 0; opacity: .5; }
+  /* underdrawing — wide, soft, slightly displaced */
+  .inf-bg {
+    stroke: var(--water);
+    stroke-width: 4.5;
+    animation:
+      infDrawBg 4.5s cubic-bezier(.38,0,.58,1) forwards 4.0s,
+      infFadeBg 1.5s ease-in              forwards 8.8s;
   }
+  /* top stroke — crisp, narrow */
+  .inf-fg {
+    stroke: var(--water);
+    stroke-width: 1.7;
+    animation:
+      infDrawFg 4.5s cubic-bezier(.38,0,.58,1) forwards 4.0s,
+      infFadeFg 1.5s ease-in              forwards 8.8s;
+  }
+
+  @keyframes infDrawBg { 0%{stroke-dashoffset:1;opacity:0} 6%{opacity:.14} 100%{stroke-dashoffset:0;opacity:.14} }
+  @keyframes infDrawFg { 0%{stroke-dashoffset:1;opacity:0} 6%{opacity:.52} 100%{stroke-dashoffset:0;opacity:.52} }
+  @keyframes infFadeBg { 0%{opacity:.14} 100%{opacity:0} }
+  @keyframes infFadeFg { 0%{opacity:.52} 100%{opacity:0} }
 
   .infinity-text {
     text-align: center;
     opacity: 0;
-    animation: infTextIn 2s ease-out forwards;
-    animation-delay: 9.7s;
+    animation: infTextIn 2.2s ease-out forwards 9.6s;
   }
   @keyframes infTextIn {
-    0%   { opacity: 0; transform: translateY(5px); }
+    0%   { opacity: 0; transform: translateY(4px); }
     100% { opacity: .62; transform: translateY(0); }
   }
   .infinity-text p {
-    font-family: 'Karla', sans-serif;
-    font-weight: 300;
-    font-size: clamp(.58rem, 1.1vw, .68rem);
+    font-family: 'Caveat', cursive;
+    font-weight: 400;
+    font-size: clamp(1rem, 2.1vw, 1.12rem);
     color: var(--water);
-    letter-spacing: .16em;
-    line-height: 2;
+    letter-spacing: .03em;
+    line-height: 1.75;
   }
 </style>
 </head>
@@ -401,6 +418,42 @@
 </div>
 
 <div class="main-content">
+  <div class="infinity-wrap">
+    <!--
+      Two layers: .inf-bg (wide, soft) + .inf-fg (narrow, crisp) = sketchy pen feel.
+      Displacement filter gives organic wobble so lines aren't perfectly smooth.
+      pathLength="1" lets stroke-dashoffset draw in 0-1 space.
+      Right loop slightly taller than left for natural asymmetry.
+    -->
+    <svg class="infinity-svg" width="164" height="58" viewBox="0 0 200 70" aria-hidden="true">
+      <defs>
+        <filter id="inf-sketch" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" seed="7" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8"
+            xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <!-- underdrawing — same path, drawn first, wider and translucent -->
+      <path class="inf-bg" pathLength="1" filter="url(#inf-sketch)"
+        d="M 100,35
+           C 107,7  178,5  175,34
+           C 172,61 108,64 100,35
+           C 92,7   22,7   25,34
+           C 28,62  93,64  101,34"/>
+      <!-- top stroke — slight end-point offset so crossing stays open like real pen -->
+      <path class="inf-fg" pathLength="1" filter="url(#inf-sketch)"
+        d="M 100,35
+           C 107,7  178,5  175,34
+           C 172,61 108,64 100,35
+           C 92,7   22,7   25,34
+           C 28,62  93,64  101,34"/>
+    </svg>
+    <div class="infinity-text">
+      <p>Art begins in noticing.</p>
+      <p>Beneath every surface is a quieter truth.</p>
+    </div>
+  </div>
+
   <div class="logo-group">
     <span class="star">
       <svg viewBox="0 0 24 24" fill="none">
@@ -436,26 +489,6 @@
     </span>
     <span class="timeline-label">timeline</span>
   </a>
-
-  <div class="infinity-wrap">
-    <!--
-      pathLength="1" normalises the path so stroke-dasharray/offset use 0–1 range.
-      Path: start at crossing point, trace right loop, return, trace left loop, return.
-      Slight asymmetry (right loop a touch taller) gives a hand-drawn feel.
-    -->
-    <svg class="infinity-svg" width="116" height="42" viewBox="0 0 140 50" aria-hidden="true">
-      <path pathLength="1"
-        d="M 70,25
-           C 73,7  119,7  119,25
-           C 119,43 73,43  70,25
-           C 67,9   21,9   21,25
-           C 21,41  67,41  70,25"/>
-    </svg>
-    <div class="infinity-text">
-      <p>Art begins in noticing.</p>
-      <p>Beneath every surface is a quieter truth.</p>
-    </div>
-  </div>
 
   <div class="contact">
     <span class="mail-icon">
