@@ -320,8 +320,8 @@
 
   /* === INFINITY ∞ + QUOTE === */
   .infinity-wrap {
-    margin-top: 6px; z-index: 2;
-    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    margin-top: 3px; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
   }
 
   /* small ∞ svg — fades in then dissolves */
@@ -349,9 +349,9 @@
     100% { opacity: .58; transform: translateY(0); }
   }
   .infinity-text p {
-    font-family: 'Caveat', cursive; font-weight: 400;
-    font-size: clamp(.92rem, 1.9vw, 1.05rem);
-    color: var(--water); letter-spacing: .02em; line-height: 1.7;
+    font-family: 'Karla', sans-serif; font-weight: 300;
+    font-size: clamp(.58rem, 1.2vw, .66rem);
+    color: var(--water); letter-spacing: .18em; line-height: 1.9;
   }
 </style>
 </head>
@@ -406,9 +406,9 @@
 
   <div class="infinity-wrap">
     <!-- small ∞ — about the size of the ◡ face — fades in then dissolves -->
-    <svg class="infinity-svg" width="34" height="20" viewBox="0 0 158 52" aria-hidden="true">
+    <svg class="infinity-svg" width="38" height="22" viewBox="0 0 158 52" aria-hidden="true">
       <path d="M 80,27 C 86,5 136,3 134,24 C 132,44 84,49 80,27 C 76,5 22,7 24,26 C 26,44 74,48 81,26"
-        fill="none" stroke="#7badc4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        fill="none" stroke="#7badc4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <div class="infinity-text">
       <p>Art begins in noticing.</p>
