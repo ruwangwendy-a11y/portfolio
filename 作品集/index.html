@@ -219,6 +219,28 @@
 
   @keyframes timelineIn { 0%{opacity:0;transform:translateY(8px)}100%{opacity:.55;transform:translateY(0)} }
 
+  /* === PIXEL EARTH ENTRY === */
+  .earth-entry {
+    margin-top: 10px; z-index: 2; opacity: 0;
+    animation: earthIn .7s ease-out forwards; animation-delay: 5.05s;
+    display: flex; align-items: center; gap: 7px;
+    cursor: pointer; transition: transform .3s ease;
+    text-decoration: none;
+  }
+  .earth-entry:hover { transform: translateY(-1px); }
+  .earth-entry:hover .earth-label { color: #4a6fd4; }
+  .earth-icon svg {
+    image-rendering: pixelated; image-rendering: crisp-edges;
+    transition: transform .3s ease;
+  }
+  .earth-entry:hover .earth-icon svg { transform: rotate(18deg); }
+  .earth-label {
+    font-family: 'Caveat', cursive; font-weight: 400;
+    font-size: clamp(.78rem, 1.5vw, .88rem);
+    color: var(--soft); letter-spacing: .02em; transition: color .3s ease;
+  }
+  @keyframes earthIn { 0%{opacity:0;transform:translateY(8px)}100%{opacity:.55;transform:translateY(0)} }
+
   /* === CONTACT — bottom left === */
   .contact {
     position: absolute; bottom: 28px; left: 28px;
@@ -436,6 +458,68 @@
       </svg>
     </span>
     <span class="timeline-label">timeline</span>
+  </a>
+
+  <a href="earth.html" class="earth-entry">
+    <span class="earth-icon">
+      <svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated;">
+        <rect x="5" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="6" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="7" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="8" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="3" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="4" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="5" y="2" width="1" height="1" fill="#002fa7"/>
+        <rect x="6" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="7" y="2" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="8" y="2" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="9" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="11" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="12" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="2" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="3" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="4" y="3" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="3" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="6" y="3" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="8" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="11" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="12" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="13" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="2" y="4" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="3" y="4" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="4" y="4" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="4" width="1" height="1" fill="#5a8a4a"/>
+        <rect x="6" y="4" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="4" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="1" y="5" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="8" y="5" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="9" y="5" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="10" y="5" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="14" y="5" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="6" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="10" y="6" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="11" y="6" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="14" y="6" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="7" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="11" y="7" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="8" width="1" height="1" fill="#002fa7"/>
+        <rect x="12" y="8" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="9" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="8" y="9" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="6" y="10" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="10" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="8" y="10" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="11" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="13" width="5" height="1" fill="#4a6fd4"/>
+      </svg>
+    </span>
+    <span class="earth-label">earth online</span>
   </a>
 
   <div class="contact">
