@@ -15,7 +15,7 @@
     --klein-light: #4a6fd4;
     --klein-pale:  #8ea4d8;
     --klein-faint: #c0cce8;
-    --receipt-bg:  #f0f4fb;
+    --receipt-bg:  #f7f5f0;
     --dv:          #b8c4dc;
     --glass:       rgba(255,255,255,.18);
     --glass-b:     rgba(255,255,255,.28);
@@ -164,6 +164,8 @@
   /* The paper receipt sits inside the glass card */
   .receipt {
     background: var(--receipt-bg);
+    /* subtle paper grain via SVG noise */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
     padding: 18px 16px 12px; position: relative;
     border-radius: 4px;
   }
@@ -174,14 +176,14 @@
   .receipt::before {
     top:-6px;
     background-image:
-      linear-gradient(135deg,var(--receipt-bg) 33.33%,transparent 33.33%),
-      linear-gradient(225deg,var(--receipt-bg) 33.33%,transparent 33.33%);
+      linear-gradient(135deg,#f7f5f0 33.33%,transparent 33.33%),
+      linear-gradient(225deg,#f7f5f0 33.33%,transparent 33.33%);
   }
   .receipt::after {
     bottom:-6px;
     background-image:
-      linear-gradient(315deg,var(--receipt-bg) 33.33%,transparent 33.33%),
-      linear-gradient(45deg,var(--receipt-bg) 33.33%,transparent 33.33%);
+      linear-gradient(315deg,#f7f5f0 33.33%,transparent 33.33%),
+      linear-gradient(45deg,#f7f5f0 33.33%,transparent 33.33%);
   }
 
   .receipt-inner { position:relative; }
@@ -563,7 +565,7 @@ async function doSave(){
       document.head.appendChild(s);
       await new Promise((r,j)=>{s.onload=r;s.onerror=j;});
     }
-    const cv=await html2canvas(el,{backgroundColor:'#f0f4fb',scale:3,useCORS:true});
+    const cv=await html2canvas(el,{backgroundColor:'#f7f5f0',scale:3,useCORS:true});
     const a=document.createElement('a');
     a.download='human-receipt.png'; a.href=cv.toDataURL('image/png'); a.click();
   }catch(e){ alert('Long-press or right-click the receipt to save.'); }
