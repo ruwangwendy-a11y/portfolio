@@ -39,7 +39,7 @@
     letter-spacing:.02em
   }
   .sidebar-page-sub{
-    font-family:'Karla',sans-serif;font-weight:300;font-size:.52rem;
+    font-family:'Karla',sans-serif;font-weight:300;font-size:.6rem;
     letter-spacing:.2em;text-transform:uppercase;
     color:var(--soft);opacity:0;animation:fadeIn .5s ease-out forwards .4s;
     margin-bottom:14px
@@ -170,7 +170,8 @@
   .lightbox-close{
     position:absolute;top:14px;right:18px;
     font-family:'Karla',sans-serif;font-size:.56rem;letter-spacing:.12em;
-    text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:color .3s
+    text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:color .3s;
+    background:none;border:none;padding:0
   }
   .lightbox-close:hover{color:rgba(255,255,255,.75)}
   @keyframes lbIn{0%{opacity:0}100%{opacity:1}}
@@ -191,10 +192,13 @@
       width:100%;padding:6px 0 2px;border-top:1px solid rgba(168,212,230,.08)
     }
     .sidebar-bottom a{font-size:.72rem;opacity:1}
-    .main-area{margin-left:0;padding:12px 10px 28px}
+    body{min-height:0}
+    .page-layout{min-height:0}
+    .main-area{margin-left:0;padding:12px 10px 28px;min-height:0;flex:none}
     /* fix photo cards: use 80vw so user can see there are more photos to swipe */
-    .strip-photo{height:200px;min-width:80vw}
+    .strip-photo{height:220px;min-width:78vw;max-width:78vw}
   }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -221,18 +225,18 @@
 
     <div class="series-thumb-list">
       <button class="series-thumb active" onclick="switchPanel('panel-st',this)">
-        <div class="thumb-img-wrap"><img src="images/imagery_01.jpg" alt="Still There"/></div>
+        <div class="thumb-img-wrap"><img loading="lazy" src="images/imagery_01.jpg" alt="Still There"/></div>
         <div class="thumb-title">Still There</div>
         <div class="thumb-year">2024 · film</div>
       </button>
       <button class="series-thumb" onclick="switchPanel('panel-lbw',this)">
-        <div class="thumb-img-wrap"><img src="images/imagery_02.jpg" alt="Look Both Ways"/></div>
+        <div class="thumb-img-wrap"><img loading="lazy" src="images/imagery_02.jpg" alt="Look Both Ways"/></div>
         <div class="thumb-title">Look Both Ways</div>
         <div class="thumb-year">2026 · digital</div>
       </button>
     
       <button class="series-thumb" onclick="switchPanel('panel-ay',this)">
-        <div class="thumb-img-wrap"><img src="images/imagery_03.jpg" alt="After You"/></div>
+        <div class="thumb-img-wrap"><img loading="lazy" src="images/imagery_03.jpg" alt="After You"/></div>
         <div class="thumb-title">After You</div>
         <div class="thumb-year">2026 · short film</div>
       </button>
@@ -240,6 +244,7 @@
 
     <div class="sidebar-bottom">
       <a href="visuals.html">Visuals</a>
+      <a href="timeline.html">Timeline</a>
       <a href="about.html">About</a>
       <a href="index.html">← home</a>
     </div>
@@ -254,12 +259,12 @@
       </div>
       <p class="grid-hint">click the image to zoom in</p>
       <div class="photo-strip">
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_04.jpg" alt="Still There"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_05.jpg" alt="Still There"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_06.jpg" alt="Still There"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_07.jpg" alt="Still There"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_08.jpg" alt="Still There"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_09.jpg" alt="Still There"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_04.jpg" alt="Still There — film photograph 1 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_05.jpg" alt="Still There — film photograph 2 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_06.jpg" alt="Still There — film photograph 3 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_07.jpg" alt="Still There — film photograph 4 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_08.jpg" alt="Still There — film photograph 5 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_09.jpg" alt="Still There — film photograph 6 of 6"/></div>
       </div>
       <p class="strip-hint">drag or scroll to see more →</p>
     </div>
@@ -272,12 +277,12 @@
       </div>
       <p class="grid-hint">click the image to zoom in</p>
       <div class="photo-strip">
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_10.jpg" alt="Look Both Ways"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_11.jpg" alt="Look Both Ways"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_12.jpg" alt="Look Both Ways"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_13.jpg" alt="Look Both Ways"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_14.jpg" alt="Look Both Ways"/></div>
-        <div class="strip-photo" onclick="openLightbox(this)"><img src="images/imagery_15.jpg" alt="Look Both Ways"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_10.jpg" alt="Look Both Ways — photograph 1 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_11.jpg" alt="Look Both Ways — photograph 2 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_12.jpg" alt="Look Both Ways — photograph 3 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_13.jpg" alt="Look Both Ways — photograph 4 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_14.jpg" alt="Look Both Ways — photograph 5 of 6"/></div>
+        <div class="strip-photo" onclick="openLightbox(this)"><img loading="lazy" src="images/imagery_15.jpg" alt="Look Both Ways — photograph 6 of 6"/></div>
       </div>
       <p class="strip-hint">drag or scroll to see more →</p>
     </div>
@@ -296,7 +301,7 @@
           opacity:1;animation:fadeUp .7s ease-out forwards;cursor:pointer;
           overflow:hidden;border-radius:2px;position:relative;
         ">
-          <img src="images/imagery_16.jpg" alt="After You" style="width:100%;height:auto;object-fit:contain;filter:saturate(.95);display:block"/>
+          <img loading="lazy" src="images/imagery_16.jpg" alt="After You" style="width:100%;height:auto;object-fit:contain;filter:saturate(.95);display:block"/>
         </div>
       </div>
 
@@ -327,8 +332,8 @@
   </main>
 </div>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">close ×</span>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" onclick="closeLightbox()">close ×</button>
   <img id="lightbox-img" src="" alt=""/>
 </div>
 
@@ -345,7 +350,7 @@ function switchPanel(id,btn){
 }
 function openLightbox(el){
   var img=el.querySelector('img');
-  if(img){document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';}
+  if(img){document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox-img').alt=img.alt||'';document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';document.querySelector('.lightbox-close').focus();}
 }
 function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
@@ -360,6 +365,18 @@ document.querySelectorAll('.photo-strip').forEach(function(strip){
   strip.style.cursor='grab';
 });
 
+
+// Keyboard accessibility for lightbox triggers
+document.querySelectorAll('.artwork-img-wrap,.strip-photo,.tl-img-wrap').forEach(function(el){
+  if(!el.getAttribute('tabindex')){
+    el.setAttribute('tabindex','0');
+    el.setAttribute('role','button');
+    el.setAttribute('aria-label','Open image fullscreen');
+    el.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openLightbox(this);}
+    });
+  }
+});
 </script>
 </body>
 </html>

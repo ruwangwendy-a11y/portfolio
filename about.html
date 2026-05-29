@@ -83,7 +83,7 @@
   .profile-sub{
     font-family:'Karla',sans-serif;font-weight:300;
     font-size:clamp(.58rem,1.1vw,.68rem);letter-spacing:.2em;
-    text-transform:uppercase;color:var(--soft);opacity:.5
+    text-transform:uppercase;color:var(--soft);opacity:.7
   }
 
   @keyframes fadeUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
@@ -171,6 +171,7 @@
     .photo-circle{width:130px;height:130px}
     .cat-ears svg{width:65px;height:26px}
   }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -189,6 +190,8 @@
       <a href="visuals.html">Visuals</a>
       <div class="nav-dot"></div>
       <a href="imagery.html">Imagery</a>
+      <div class="nav-dot"></div>
+      <a href="timeline.html">Timeline</a>
     </nav>
   </header>
 

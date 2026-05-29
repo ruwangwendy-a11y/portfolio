@@ -64,7 +64,7 @@
   .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(10,22,40,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:pointer;padding:28px}
   .lightbox.active{display:flex;animation:lbIn .25s ease-out}
   .lightbox img{max-width:90vw;max-height:86vh;object-fit:contain;border-radius:2px;box-shadow:0 5px 28px rgba(0,0,0,.25)}
-  .lightbox-close{position:absolute;top:14px;right:18px;font-family:'Karla',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:color .3s}
+  .lightbox-close{position:absolute;top:14px;right:18px;font-family:'Karla',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:color .3s;background:none;border:none;padding:0}
   .lightbox-close:hover{color:rgba(255,255,255,.75)}
   @keyframes lbIn{0%{opacity:0}100%{opacity:1}}
 
@@ -72,7 +72,30 @@
   .page-footer a{font-family:'Caveat',cursive;font-size:.68rem;color:var(--soft);text-decoration:none;opacity:.35;transition:opacity .3s,color .3s}
   .page-footer a:hover{opacity:.65;color:var(--water)}.page-footer a .face{color:var(--water)}
 
-  @media(max-width:600px){.page-wrap{padding:24px 12px 40px}.tl-item{width:42%}.tl-img-row .tl-img-wrap{max-width:80px}.tl-img-wrap{max-width:140px}}
+  @media(max-width:600px){
+    .page-wrap{padding:24px 12px 40px}
+    /* move center line to left edge */
+    .timeline::before{left:14px;transform:none}
+    .year-marker{text-align:left;padding-left:32px}
+    .year-marker::before{left:8px;transform:none}
+    .year-text{padding:0 8px 0 0}
+    /* all items: full width, single column, left-aligned */
+    .tl-item,.tl-item.tl-left,.tl-item.tl-right{
+      width:100% !important;float:none !important;
+      text-align:left !important;
+      padding-left:32px !important;padding-right:0 !important;
+      clear:none;margin-bottom:24px
+    }
+    .tl-item.tl-left .tl-img-wrap{margin-left:0 !important}
+    .tl-item.tl-left .tl-img-row{justify-content:flex-start !important}
+    .tl-clearfix{display:none}
+    /* dots all on left */
+    .tl-item::before,.tl-item.tl-left::before,.tl-item.tl-right::before{left:8px !important;right:auto !important}
+    .tl-item::after,.tl-item.tl-left::after,.tl-item.tl-right::after{left:14px !important;right:auto !important}
+    .tl-img-row .tl-img-wrap{max-width:80px}
+    .tl-img-wrap{max-width:160px}
+  }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -111,7 +134,7 @@
       <div class="tl-item-title">Birthday Girl</div>
       <div class="tl-item-meta">May · acrylic & oil · 24.5×28 in.</div>
       <div class="tl-item-desc">That single moment when everyone makes a wish — as if it's actually made of magic.</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_01.jpg" alt="Birthday Girl"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_01.jpg" alt="Birthday Girl"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -119,7 +142,7 @@
       <div class="tl-item-title">Luggage</div>
       <div class="tl-item-meta">Apr · acrylic & oil · 6×6.5 in. each</div>
       <div class="tl-item-desc">I don't see a map. I see my bags. Maps are about goals — but my bags carry what I trust.</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_02.jpg" alt="Luggage"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_02.jpg" alt="Luggage"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -128,7 +151,7 @@
       <div class="tl-item-meta">Apr · short film · 4 min</div>
       <div class="tl-item-desc">A solo short film exploring the space between human connection and artificial intimacy.</div>
       <div class="tl-award">★ 2026 Gollin Film Festival — Critical & Visual Thought Award (Honorable Mention)</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_03.jpg" alt="After You"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_03.jpg" alt="After You"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -136,7 +159,7 @@
       <div class="tl-item-title">Look Both Ways</div>
       <div class="tl-item-meta">Mar · digital photography series</div>
       <div class="tl-item-desc">Signs demand attention, yet we never look.</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_04.jpg" alt="Look Both Ways"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_04.jpg" alt="Look Both Ways"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -144,7 +167,7 @@
       <div class="tl-item-title">Fissure</div>
       <div class="tl-item-meta">Jan · acrylic on wood panel · 8×6 in.</div>
       <div class="tl-item-desc">Ice beginning to fracture — still solid on the surface, quietly changing from within.</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_05.jpg" alt="Fissure"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_05.jpg" alt="Fissure"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -157,9 +180,9 @@
       <div class="tl-item-meta">oil on panel · series of 3</div>
       <div class="tl-item-desc">Three small paintings finding life in Rochester's winter stillness.</div>
       <div class="tl-img-row">
-        <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_06.jpg" alt="Living Signs of Life — Cat"/></div>
-        <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_07.jpg" alt="Living Signs of Life — Snow"/></div>
-        <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_08.jpg" alt="Living Signs of Life — Bridge"/></div>
+        <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_06.jpg" alt="Living Signs of Life — Cat"/></div>
+        <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_07.jpg" alt="Living Signs of Life — Snow"/></div>
+        <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_08.jpg" alt="Living Signs of Life — Bridge"/></div>
       </div>
     </div>
     <div class="tl-clearfix"></div>
@@ -171,14 +194,14 @@
     <div class="tl-item tl-left" style="animation-delay:1.3s">
       <div class="tl-item-title">Untitled</div>
       <div class="tl-item-meta">Nov · acrylic on canvas</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_09.jpg" alt="Untitled"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_09.jpg" alt="Untitled"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
     <div class="tl-item tl-right" style="animation-delay:1.4s">
       <div class="tl-item-title">Old Friends</div>
       <div class="tl-item-meta">Oct · acrylic on canvas</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_10.jpg" alt="Old Friends"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_10.jpg" alt="Old Friends"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -187,9 +210,9 @@
       <div class="tl-item-meta">Sep · mixed media</div>
       <div class="tl-item-desc">Strangers, acquaintances, and the familiar — layered through found materials.</div>
       <div class="tl-img-row">
-        <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_11.jpg" alt="Collage 1"/></div>
-        <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_12.jpg" alt="Collage 2"/></div>
-        <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_13.jpg" alt="Collage 3"/></div>
+        <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_11.jpg" alt="Collage 1"/></div>
+        <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_12.jpg" alt="Collage 2"/></div>
+        <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_13.jpg" alt="Collage 3"/></div>
       </div>
     </div>
     <div class="tl-clearfix"></div>
@@ -197,7 +220,7 @@
     <div class="tl-item tl-right" style="animation-delay:1.6s">
       <div class="tl-item-title">Everything Changed</div>
       <div class="tl-item-meta">collage on paper</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_14.jpg" alt="Everything Changed"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_14.jpg" alt="Everything Changed"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -205,29 +228,28 @@
       <div class="tl-item-title">Still There</div>
       <div class="tl-item-meta">35mm film series</div>
       <div class="tl-item-desc">The beauty in overlooked corners — quiet places that remain.</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_15.jpg" alt="Still There"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_15.jpg" alt="Still There"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
     <div class="tl-item tl-right" style="animation-delay:1.8s">
       <div class="tl-item-title">Starry Garden</div>
       <div class="tl-item-meta">acrylic on canvas</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_16.jpg" alt="Starry Garden"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_16.jpg" alt="Starry Garden"/></div>
+    </div>
+    <div class="tl-clearfix"></div>
+
+    <div class="tl-item tl-right" style="animation-delay:1.85s">
+      <div class="tl-item-title">Untitled</div>
+      <div class="tl-item-meta">Feb · charcoal on paper</div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_17.jpg" alt="Untitled — charcoal still life"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
     <div class="tl-item tl-left" style="animation-delay:1.9s">
-      
-    <div class="tl-item tl-right" style="animation-delay:1.85s">
-      <div class="tl-item-title">Untitled</div>
-      <div class="tl-item-meta">Feb · charcoal on paper</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_17.jpg" alt="Untitled — charcoal still life"/></div>
-    </div>
-    <div class="tl-clearfix"></div>
-
-<div class="tl-item-title">Wire Rabbit</div>
+      <div class="tl-item-title">Wire Rabbit</div>
       <div class="tl-item-meta">Feb · sculpture</div>
-      <div class="tl-img-wrap" onclick="openLightbox(this)"><img src="images/timeline_18.jpg" alt="Wire Rabbit"/></div>
+      <div class="tl-img-wrap" onclick="openLightbox(this)"><img loading="lazy" src="images/timeline_18.jpg" alt="Wire Rabbit"/></div>
     </div>
     <div class="tl-clearfix"></div>
 
@@ -237,15 +259,27 @@
   </div>
 </div>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">close ×</span>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" onclick="closeLightbox()">close ×</button>
   <img id="lightbox-img" src="" alt=""/>
 </div>
 
 <script>
-function openLightbox(el){var img=el.querySelector('img');if(img){document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';}}
+function openLightbox(el){var img=el.querySelector('img');if(img){document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox-img').alt=img.alt||'';document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';document.querySelector('.lightbox-close').focus();}}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
+
+// Keyboard accessibility for lightbox triggers
+document.querySelectorAll('.artwork-img-wrap,.strip-photo,.tl-img-wrap').forEach(function(el){
+  if(!el.getAttribute('tabindex')){
+    el.setAttribute('tabindex','0');
+    el.setAttribute('role','button');
+    el.setAttribute('aria-label','Open image fullscreen');
+    el.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openLightbox(this);}
+    });
+  }
+});
 </script>
 </body>
 </html>
