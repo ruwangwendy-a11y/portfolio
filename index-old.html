@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>w◡w</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Karla:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #faf9f7;
+    --ink: #2c2c2c;
+    --soft: #6b7b8d;
+    --nav-text: #7a6f64;
+    --water: #7badc4;
+    --water-light: #a8d4e6;
+    --water-pale: #d4eef7;
+    --rose: #c47b7b;
+    --rose-light: #d4a0a0;
+    --rose-soft: #e8c4c4;
+    --star: #d4b85a;
+  }
+
+  body {
+    background: var(--bg);
+    overflow: hidden;
+    font-family: 'Karla', sans-serif;
+    color: var(--ink);
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .drop-scene {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: flex-start; justify-content: center;
+    pointer-events: none;
+  }
+  .water-drop-wrap {
+    position: absolute; top: -50px; opacity: 0;
+    animation: dropFall 1.8s cubic-bezier(0.4,0,0.7,1) forwards;
+    animation-delay: 0.3s;
+    filter: drop-shadow(0 2px 5px rgba(123,173,196,0.12));
+  }
+  .water-drop-wrap svg { width: 18px; height: 26px; }
+
+  @keyframes dropFall {
+    0% { top: -50px; opacity: 0; transform: scale(0.8); }
+    6% { opacity: 1; transform: scale(1); }
+    65% { top: calc(50vh - 40px); transform: scale(1); }
+    82% { top: calc(50vh - 8px); transform: scale(1.06,0.9); }
+    93% { top: calc(50vh); transform: scale(1.15,0.65); }
+    100% { top: calc(50vh + 2px); opacity: 0; transform: scale(1.5,0.2); }
+  }
+
+  .splash-container {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 90; pointer-events: none;
+  }
+  .ink-wash {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0); opacity: 0;
+  }
+  .ink-wash:nth-child(1) { animation: washOut 1.8s ease-out forwards; animation-delay: 1.95s; }
+  .ink-wash:nth-child(2) { animation: washOut 2.2s ease-out forwards; animation-delay: 2.1s; }
+  .ink-wash:nth-child(3) { animation: washOut 2.6s ease-out forwards; animation-delay: 2.25s; }
+
+  @keyframes washOut {
+    0% { transform: translate(-50%,-50%) scale(0) rotate(0deg); opacity: 0.55; }
+    25% { opacity: 0.3; }
+    100% { transform: translate(-50%,-50%) scale(6) rotate(5deg); opacity: 0; }
+  }
+
+  .splash-dot { position: absolute; top: 50%; left: 50%; opacity: 0; }
+  .splash-dot svg { width: 5px; height: 7px; }
+  .splash-dot:nth-child(4) { animation: df1 .8s ease-out forwards; animation-delay: 1.95s; }
+  .splash-dot:nth-child(5) { animation: df2 .75s ease-out forwards; animation-delay: 1.98s; }
+  .splash-dot:nth-child(6) { animation: df3 .9s ease-out forwards; animation-delay: 1.93s; }
+  .splash-dot:nth-child(7) { animation: df4 .7s ease-out forwards; animation-delay: 2s; }
+  .splash-dot:nth-child(8) { animation: df5 .85s ease-out forwards; animation-delay: 1.96s; }
+
+  @keyframes df1 { 0%{transform:translate(0,0) scale(1);opacity:.65}100%{transform:translate(-30px,-60px) scale(.2);opacity:0} }
+  @keyframes df2 { 0%{transform:translate(0,0) scale(1);opacity:.6}100%{transform:translate(25px,-65px) scale(.2);opacity:0} }
+  @keyframes df3 { 0%{transform:translate(0,0) scale(1);opacity:.5}100%{transform:translate(-48px,-30px) scale(.25);opacity:0} }
+  @keyframes df4 { 0%{transform:translate(0,0) scale(1);opacity:.55}100%{transform:translate(42px,-40px) scale(.2);opacity:0} }
+  @keyframes df5 { 0%{transform:translate(0,0) scale(1);opacity:.5}100%{transform:translate(-12px,-75px) scale(.25);opacity:0} }
+
+  .water-bloom {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    width: 160px; height: 160px; z-index: 80; opacity: 0;
+    animation: bloomWash 2s ease-out forwards; animation-delay: 2.05s;
+    pointer-events: none;
+  }
+  @keyframes bloomWash {
+    0% { transform: translate(-50%,-50%) scale(0); opacity: .3; }
+    30% { opacity: .18; }
+    100% { transform: translate(-50%,-50%) scale(14); opacity: 0; }
+  }
+
+  .main-content {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; animation: contentIn 1.5s ease-out forwards; animation-delay: 3.2s;
+    background: var(--bg);
+  }
+  @keyframes contentIn { 0%{opacity:0}100%{opacity:1} }
+
+  .main-content::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .logo-group {
+    display: flex; flex-direction: column; align-items: center;
+    position: relative; z-index: 2;
+    opacity: 0; animation: logoUp 1s ease-out forwards; animation-delay: 3.6s;
+    gap: 1px;
+  }
+
+  .star {
+    animation: starTwinkle 5s ease-in-out infinite;
+    animation-delay: 5s; opacity: 0.82; line-height: 1;
+  }
+  .star svg { width: 15px; height: 15px; }
+
+  @keyframes starTwinkle {
+    0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.82; }
+    25% { transform: rotate(6deg) scale(1.08); opacity: 1; }
+    50% { transform: rotate(-4deg) scale(0.92); opacity: 0.65; }
+    75% { transform: rotate(3deg) scale(1.04); opacity: 0.9; }
+  }
+
+  .logo {
+    font-family: 'Caveat', cursive; font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    color: var(--ink); letter-spacing: 0.08em;
+    line-height: 1; text-align: center;
+  }
+  .logo .face { color: var(--water); }
+
+  @keyframes logoUp { 0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)} }
+
+  .tagline {
+    font-family: 'Karla', sans-serif; font-weight: 300;
+    font-size: clamp(0.58rem, 1.3vw, 0.7rem);
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--soft); margin-top: 8px; z-index: 2;
+    opacity: 0; animation: tagIn .8s ease-out forwards; animation-delay: 4s;
+    text-align: center;
+  }
+  @keyframes tagIn { 0%{opacity:0;transform:translateY(8px)}100%{opacity:.42;transform:translateY(0)} }
+
+  .divider {
+    margin: 16px 0; z-index: 2; opacity: 0;
+    animation: divIn .6s ease-out forwards; animation-delay: 4.15s;
+  }
+  .divider svg { width: 42px; height: 5px; }
+  @keyframes divIn { 0%{opacity:0}100%{opacity:.3} }
+
+  /* === NAV — 3 items === */
+  .nav {
+    display: flex; gap: clamp(24px, 6vw, 52px); z-index: 2;
+    flex-wrap: wrap; justify-content: center; align-items: center;
+  }
+  .nav a {
+    font-family: 'Caveat', cursive; font-weight: 600;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: var(--nav-text); text-decoration: none;
+    padding: 3px 0; position: relative; opacity: 0;
+    transition: color 0.3s ease; letter-spacing: 0.02em;
+  }
+  .nav a:hover { color: var(--water); }
+  .nav a::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; width: 0; height: 1.5px;
+    background: var(--water-light); transition: width 0.35s ease; border-radius: 1px;
+  }
+  .nav a:hover::after { width: 100%; }
+
+  .nav-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--rose-light); opacity: 0; flex-shrink: 0;
+  }
+
+  .nav a:nth-child(1) { animation: navUp .6s ease-out forwards; animation-delay: 4.3s; }
+  .nav-dot:nth-child(2) { animation: dotIn .4s ease-out forwards; animation-delay: 4.38s; }
+  .nav a:nth-child(3) { animation: navUp .6s ease-out forwards; animation-delay: 4.45s; }
+  .nav-dot:nth-child(4) { animation: dotIn .4s ease-out forwards; animation-delay: 4.53s; }
+  .nav a:nth-child(5) { animation: navUp .6s ease-out forwards; animation-delay: 4.6s; }
+
+  @keyframes navUp { 0%{opacity:0;transform:translateY(12px)}100%{opacity:.8;transform:translateY(0)} }
+  @keyframes dotIn { 0%{opacity:0}100%{opacity:.5} }
+
+  /* === TIMELINE === */
+  .timeline-entry {
+    margin-top: 40px; z-index: 2; opacity: 0;
+    animation: timelineIn .7s ease-out forwards; animation-delay: 4.85s;
+    display: flex; align-items: center; gap: 6px;
+    cursor: pointer; transition: transform 0.3s ease;
+    text-decoration: none;
+  }
+  .timeline-entry:hover { transform: translateY(-1px); }
+  .timeline-entry:hover .timeline-label { color: var(--water); }
+  .timeline-entry:hover .timeline-icon svg line,
+  .timeline-entry:hover .timeline-icon svg circle { stroke: var(--water); }
+
+  .timeline-icon svg { width: 16px; height: 16px; transition: all 0.3s ease; }
+
+  .timeline-label {
+    font-family: 'Caveat', cursive; font-weight: 400;
+    font-size: clamp(0.78rem, 1.5vw, 0.88rem);
+    color: var(--soft); letter-spacing: 0.02em;
+    transition: color 0.3s ease;
+  }
+
+  @keyframes timelineIn { 0%{opacity:0;transform:translateY(8px)}100%{opacity:.55;transform:translateY(0)} }
+
+  /* === PIXEL EARTH ENTRY === */
+  .earth-entry {
+    margin-top: 10px; z-index: 2; opacity: 0;
+    animation: earthIn .7s ease-out forwards; animation-delay: 5.05s;
+    display: flex; align-items: center; gap: 7px;
+    cursor: pointer; transition: transform .3s ease;
+    text-decoration: none;
+  }
+  .earth-entry:hover { transform: translateY(-1px); }
+  .earth-entry:hover .earth-label { color: #4a6fd4; }
+  .earth-icon svg {
+    image-rendering: pixelated; image-rendering: crisp-edges;
+    transition: transform .3s ease;
+  }
+  .earth-entry:hover .earth-icon svg { transform: rotate(18deg); }
+  .earth-label {
+    font-family: 'Caveat', cursive; font-weight: 400;
+    font-size: clamp(.78rem, 1.5vw, .88rem);
+    color: var(--soft); letter-spacing: .02em; transition: color .3s ease;
+  }
+  @keyframes earthIn { 0%{opacity:0;transform:translateY(8px)}100%{opacity:.55;transform:translateY(0)} }
+
+  /* === CONTACT — bottom left === */
+  .contact {
+    position: absolute; bottom: 28px; left: 28px;
+    z-index: 2; opacity: 0;
+    animation: contactIn .7s ease-out forwards; animation-delay: 5.1s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .contact a {
+    font-family: 'Caveat', cursive; font-weight: 400;
+    font-size: clamp(0.72rem,1.3vw,0.82rem);
+    color: var(--rose); text-decoration: none;
+    position: relative; transition: color 0.3s ease;
+  }
+  .contact a:hover { color: var(--rose-light); }
+  .contact a::after {
+    content: ''; position: absolute;
+    bottom: -1px; left: 0; width: 100%; height: 1px;
+    background: var(--rose-soft); opacity: .35; transition: opacity .3s ease;
+  }
+  .contact a:hover::after { opacity: .65; }
+  .contact .mail-icon svg { width: 11px; height: 8px; }
+  @keyframes contactIn { 0%{opacity:0}100%{opacity:.5} }
+
+  /* === BOTTOM === */
+  .bottom-hint {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 2; opacity: 0;
+    animation: hintFade .8s ease-out forwards; animation-delay: 5.3s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .bottom-hint .explore-text {
+    font-family: 'Karla', sans-serif; font-size: .6rem;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--soft); opacity: .52;
+  }
+  .bottom-hint .explore-arrow {
+    font-family: 'Karla', sans-serif; font-size: .7rem;
+    color: var(--soft); opacity: .45;
+    animation: arrowBounce 2.5s ease-in-out infinite; animation-delay: 6s;
+  }
+  @keyframes hintFade { 0%{opacity:0}100%{opacity:1} }
+  @keyframes arrowBounce {
+    0%,100% { transform: translateY(0); opacity: .38; }
+    50% { transform: translateY(4px); opacity: .55; }
+  }
+
+  .corner-year {
+    position: absolute; bottom: 28px; right: 28px;
+    font-family: 'Caveat', cursive; font-size: .7rem;
+    color: var(--rose); opacity: 0;
+    animation: yearIn .6s ease-out forwards; animation-delay: 5.1s; z-index: 2;
+  }
+  @keyframes yearIn { 0%{opacity:0}100%{opacity:.38} }
+
+  /* === PIXEL CAT === */
+  .corner-cat-wrap {
+    position: absolute; bottom: 46px; right: 22px;
+    z-index: 2; opacity: 0;
+    animation: catFadeIn .9s ease-out forwards; animation-delay: 5.6s;
+    transition: opacity .3s;
+  }
+  @keyframes catFadeIn {
+    0%   { opacity: 0; transform: translateY(6px); }
+    100% { opacity: .68; transform: translateY(0); }
+  }
+  .corner-cat-wrap:hover { opacity: .88 !important; }
+  .corner-cat {
+    display: block; width: 108px;
+    image-rendering: pixelated; image-rendering: crisp-edges;
+    /* pivot near tail base — right of body center */
+    transform-origin: 48% 62%;
+    animation: catTailWag 4s ease-in-out infinite; animation-delay: 7s;
+    /* GPU 合成层 — 防止像素抖动 */
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  /* very gentle pendulum — just 1.2° each way */
+  @keyframes catTailWag {
+    0%   { transform: rotate(-1.2deg) translateZ(0); }
+    50%  { transform: rotate(1.2deg)  translateZ(0); }
+    100% { transform: rotate(-1.2deg) translateZ(0); }
+  }
+
+  /* === EXPLORE FLOWER === */
+  .bottom-hint { cursor: pointer; gap: 6px; }
+
+  .explore-flower {
+    width: 22px; height: 22px;
+    transition: transform .4s cubic-bezier(.34,1.4,.64,1);
+    filter: drop-shadow(0 1px 3px rgba(196,123,123,.08));
+  }
+  .bottom-hint:hover .explore-flower { transform: rotate(28deg) scale(1.18); }
+  .bottom-hint.spinning .explore-flower {
+    animation: flowerSpin .52s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  @keyframes flowerSpin {
+    0%   { transform: rotate(0deg)   scale(1); }
+    45%  { transform: rotate(210deg) scale(1.22); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+  .bottom-hint .explore-text { font-size: .52rem; letter-spacing: .2em; }
+
+  /* === INFINITY ∞ + QUOTE === */
+  .infinity-wrap {
+    margin-top: 3px; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+  }
+
+  /* small ∞ svg — fades in then dissolves */
+  .infinity-svg {
+    display: block; overflow: visible; opacity: 0;
+    animation:
+      infShow 0.9s ease-out forwards 4.35s,
+      infHide 0.85s ease-in  forwards 5.65s;
+  }
+  @keyframes infShow {
+    0%   { opacity: 0; transform: scale(0.8); }
+    100% { opacity: .42; transform: scale(1); }
+  }
+  @keyframes infHide {
+    0%   { opacity: .42; }
+    100% { opacity: 0; }
+  }
+
+  .infinity-text {
+    text-align: center; opacity: 0;
+    animation: infTextIn 1.8s ease-out forwards 6.3s;
+  }
+  @keyframes infTextIn {
+    0%   { opacity: 0; transform: translateY(4px); }
+    100% { opacity: .58; transform: translateY(0); }
+  }
+  .infinity-text p {
+    font-family: 'Karla', sans-serif; font-weight: 300;
+    font-size: clamp(.58rem, 1.2vw, .66rem);
+    color: var(--water); letter-spacing: .18em; line-height: 1.9;
+  }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<div class="drop-scene">
+  <div class="water-drop-wrap">
+    <svg viewBox="0 0 30 42" fill="none">
+      <path d="M15 2 C14.2 7,7 16,4.5 22 C2.5 27,3 33,7.5 36.5 C10.5 38.8,13.5 39.5,15 39.5 C16.5 39.5,19.5 38.8,22.5 36.5 C27 33,27.5 27,25.5 22 C23 16,15.8 7,15 2Z" 
+        fill="url(#dg)" stroke="#7badc4" stroke-width="0.7" stroke-linecap="round" style="stroke-dasharray:2.5 1.5;" />
+      <ellipse cx="11.5" cy="20" rx="3.5" ry="5.5" fill="white" opacity="0.4" transform="rotate(-12 11.5 20)" />
+      <ellipse cx="10.5" cy="17" rx="1.8" ry="2.8" fill="white" opacity="0.55" transform="rotate(-15 10.5 17)" />
+      <defs><radialGradient id="dg" cx=".38" cy=".32" r=".65">
+        <stop offset="0%" stop-color="#daeef6"/><stop offset="45%" stop-color="#a8d4e6"/><stop offset="100%" stop-color="#7badc4"/>
+      </radialGradient></defs>
+    </svg>
+  </div>
+</div>
+
+<div class="splash-container">
+  <div class="ink-wash"><svg width="80" height="70" viewBox="0 0 80 70" fill="none"><path d="M40 8 C52 6,68 18,72 30 C76 42,65 58,50 62 C42 64,30 63,20 55 C10 47,5 35,10 22 C14 12,28 10,40 8Z" stroke="#7badc4" stroke-width=".8" fill="none" opacity=".5" style="stroke-dasharray:3 2.5;"/></svg></div>
+  <div class="ink-wash"><svg width="130" height="110" viewBox="0 0 130 110" fill="none"><path d="M65 5 C85 3,110 15,120 35 C128 52,122 78,100 92 C85 100,60 105,38 95 C18 85,3 65,8 42 C12 22,40 8,65 5Z" stroke="#a8d4e6" stroke-width=".7" fill="none" opacity=".4" style="stroke-dasharray:4 3;"/></svg></div>
+  <div class="ink-wash"><svg width="200" height="170" viewBox="0 0 200 170" fill="none"><path d="M100 5 C130 2,170 20,185 50 C198 75,190 115,160 140 C140 155,105 168,70 155 C38 142,8 110,5 75 C2 45,30 15,60 8 C75 4,88 5,100 5Z" stroke="#d4eef7" stroke-width=".5" fill="rgba(212,238,247,.05)" opacity=".35" style="stroke-dasharray:6 4;"/></svg></div>
+  <div class="splash-dot"><svg viewBox="0 0 8 11" fill="none"><path d="M4 1C3.5 3,1.5 5,1 7C.5 8.5,1.5 10,3 10.5C3.8 10.8,4.2 10.8,5 10.5C6.5 10,7.5 8.5,7 7C6.5 5,4.5 3,4 1Z" fill="#7badc4" opacity=".55"/></svg></div>
+  <div class="splash-dot"><svg viewBox="0 0 8 11" fill="none"><path d="M4 1C3.5 3,1.5 5,1 7C.5 8.5,1.5 10,3 10.5C3.8 10.8,4.2 10.8,5 10.5C6.5 10,7.5 8.5,7 7C6.5 5,4.5 3,4 1Z" fill="#a8d4e6" opacity=".45"/></svg></div>
+  <div class="splash-dot"><svg viewBox="0 0 8 11" fill="none"><path d="M4 1C3.5 3,1.5 5,1 7C.5 8.5,1.5 10,3 10.5C3.8 10.8,4.2 10.8,5 10.5C6.5 10,7.5 8.5,7 7C6.5 5,4.5 3,4 1Z" fill="#7badc4" opacity=".5"/></svg></div>
+  <div class="splash-dot"><svg viewBox="0 0 8 11" fill="none"><path d="M4 1C3.5 3,1.5 5,1 7C.5 8.5,1.5 10,3 10.5C3.8 10.8,4.2 10.8,5 10.5C6.5 10,7.5 8.5,7 7C6.5 5,4.5 3,4 1Z" fill="#a8d4e6" opacity=".4"/></svg></div>
+  <div class="splash-dot"><svg viewBox="0 0 8 11" fill="none"><path d="M4 1C3.5 3,1.5 5,1 7C.5 8.5,1.5 10,3 10.5C3.8 10.8,4.2 10.8,5 10.5C6.5 10,7.5 8.5,7 7C6.5 5,4.5 3,4 1Z" fill="#d4eef7" opacity=".35"/></svg></div>
+</div>
+
+<div class="water-bloom">
+  <svg width="160" height="160" viewBox="0 0 180 180" fill="none">
+    <radialGradient id="bloom" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#a8d4e6" stop-opacity=".25"/><stop offset="40%" stop-color="#d4eef7" stop-opacity=".12"/><stop offset="100%" stop-color="#faf9f7" stop-opacity="0"/></radialGradient>
+    <path d="M90 10 C120 5,155 25,168 55 C178 80,172 120,148 145 C130 162,100 175,68 162 C38 150,10 118,8 82 C6 50,28 22,55 12 C68 7,78 9,90 10Z" fill="url(#bloom)"/>
+  </svg>
+</div>
+
+<div class="main-content">
+  <div class="logo-group">
+    <span class="star">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2 C12.5 2.5,14 7.5,14.5 8.5 C15 8.8,20 9.5,21 10 C20.5 10.8,16.5 14,16 14.5 C16.2 15.5,17 20,17.2 21 C16.5 20.5,12.8 18,12 17.5 C11.2 18,7.5 20.5,6.8 21 C7 20,7.8 15.5,8 14.5 C7.5 14,3.5 10.8,3 10 C4 9.5,9 8.8,9.5 8.5 C10 7.5,11.5 2.5,12 2Z" 
+          fill="#d4b85a" stroke="#c4a840" stroke-width="0.5" stroke-linecap="round" 
+          style="stroke-dasharray:2 1.5;" opacity=".85"/>
+        <ellipse cx="10.5" cy="9.5" rx="1.2" ry="1.5" fill="white" opacity=".3" transform="rotate(-10 10.5 9.5)"/>
+      </svg>
+    </span>
+    <div class="logo">w<span class="face"> ◡ </span>w</div>
+  </div>
+
+  <div class="tagline">let's start our journey</div>
+
+  <div class="infinity-wrap">
+    <!-- small ∞ — about the size of the ◡ face — fades in then dissolves -->
+    <svg class="infinity-svg" width="38" height="22" viewBox="0 0 158 52" aria-hidden="true">
+      <path d="M 80,27 C 86,5 136,3 134,24 C 132,44 84,49 80,27 C 76,5 22,7 24,26 C 26,44 74,48 81,26"
+        fill="none" stroke="#7badc4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="infinity-text">
+      <p>Art begins in noticing.</p>
+      <p>Beneath every surface is a quieter truth.</p>
+    </div>
+  </div>
+
+  <div class="divider"><svg viewBox="0 0 50 6" fill="none"><path d="M2 3 C8 1.5,15 4,22 2.5 C29 1,36 4.5,48 3" stroke="#a8d4e6" stroke-width=".8" stroke-linecap="round" fill="none" style="stroke-dasharray:2 2;"/></svg></div>
+
+  <nav class="nav">
+    <a href="visuals.html">Visuals</a>
+    <div class="nav-dot"></div>
+    <a href="imagery.html">Imagery</a>
+    <div class="nav-dot"></div>
+    <a href="about.html">About</a>
+  </nav>
+
+  <a href="timeline.html" class="timeline-entry">
+    <span class="timeline-icon">
+      <svg viewBox="0 0 20 20" fill="none">
+        <line x1="10" y1="2" x2="10" y2="18" stroke="#6b7b8d" stroke-width=".7" stroke-linecap="round" style="stroke-dasharray:2 2;" opacity=".6"/>
+        <circle cx="10" cy="4" r="1.8" fill="none" stroke="#d4b85a" stroke-width=".6" opacity=".7"/>
+        <circle cx="10" cy="10" r="1.8" fill="none" stroke="#7badc4" stroke-width=".6" opacity=".7"/>
+        <circle cx="10" cy="16" r="1.8" fill="none" stroke="#c47b7b" stroke-width=".6" opacity=".7"/>
+      </svg>
+    </span>
+    <span class="timeline-label">timeline</span>
+  </a>
+
+  <a href="earth.html" class="earth-entry">
+    <span class="earth-icon">
+      <svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated;">
+        <rect x="5" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="6" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="7" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="8" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="1" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="3" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="4" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="5" y="2" width="1" height="1" fill="#002fa7"/>
+        <rect x="6" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="7" y="2" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="8" y="2" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="9" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="11" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="12" y="2" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="2" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="3" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="4" y="3" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="3" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="6" y="3" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="8" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="11" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="12" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="13" y="3" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="2" y="4" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="3" y="4" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="4" y="4" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="4" width="1" height="1" fill="#5a8a4a"/>
+        <rect x="6" y="4" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="4" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="1" y="5" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="8" y="5" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="9" y="5" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="10" y="5" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="14" y="5" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="9" y="6" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="10" y="6" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="11" y="6" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="14" y="6" width="1" height="1" fill="#4a6fd4"/>
+        <rect x="10" y="7" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="11" y="7" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="8" width="1" height="1" fill="#002fa7"/>
+        <rect x="12" y="8" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="9" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="8" y="9" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="6" y="10" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="10" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="8" y="10" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="7" y="11" width="1" height="1" fill="#6b9e5a"/>
+        <rect x="5" y="13" width="5" height="1" fill="#4a6fd4"/>
+      </svg>
+    </span>
+    <span class="earth-label">earth online</span>
+  </a>
+
+  <div class="contact">
+    <span class="mail-icon">
+      <svg viewBox="0 0 16 12" fill="none">
+        <rect x="1" y="1" width="14" height="10" rx="1.5" stroke="#c47b7b" stroke-width=".65" fill="none" opacity=".55"/>
+        <path d="M1.5 1.5 L8 7 L14.5 1.5" stroke="#c47b7b" stroke-width=".6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+      </svg>
+    </span>
+    <a href="mailto:ru.wangwendy@gmail.com">contact me</a>
+  </div>
+
+  <div class="bottom-hint" onclick="exploreRandom()">
+    <svg class="explore-flower" viewBox="0 0 30 30" fill="none">
+      <g transform="rotate(0 15 15)"><ellipse cx="15" cy="8" rx="2.5" ry="4.8" fill="#e8c4c4" fill-opacity=".65" stroke="#c47b7b" stroke-width=".65" style="stroke-dasharray:1.5 1.2;"/></g>
+      <g transform="rotate(60 15 15)"><ellipse cx="15" cy="8" rx="2.5" ry="4.8" fill="#d4eef7" fill-opacity=".65" stroke="#7badc4" stroke-width=".65" style="stroke-dasharray:1.5 1.2;"/></g>
+      <g transform="rotate(120 15 15)"><ellipse cx="15" cy="8" rx="2.5" ry="4.8" fill="#f0e8c4" fill-opacity=".55" stroke="#d4b85a" stroke-width=".65" style="stroke-dasharray:1.5 1.2;"/></g>
+      <g transform="rotate(180 15 15)"><ellipse cx="15" cy="8" rx="2.5" ry="4.8" fill="#e8c4c4" fill-opacity=".55" stroke="#c47b7b" stroke-width=".65" style="stroke-dasharray:1.5 1.2;"/></g>
+      <g transform="rotate(240 15 15)"><ellipse cx="15" cy="8" rx="2.5" ry="4.8" fill="#d4eef7" fill-opacity=".55" stroke="#7badc4" stroke-width=".65" style="stroke-dasharray:1.5 1.2;"/></g>
+      <g transform="rotate(300 15 15)"><ellipse cx="15" cy="8" rx="2.5" ry="4.8" fill="#f0e8c4" fill-opacity=".55" stroke="#d4b85a" stroke-width=".65" style="stroke-dasharray:1.5 1.2;"/></g>
+      <circle cx="15" cy="15" r="3" fill="#d4b85a" stroke="#c4a840" stroke-width=".5" opacity=".9"/>
+      <ellipse cx="13.8" cy="14" rx=".9" ry="1.2" fill="white" opacity=".32" transform="rotate(-15 13.8 14)"/>
+    </svg>
+    <span class="explore-text">explore</span>
+  </div>
+
+  <div class="corner-year">2024 — 2026</div>
+
+  <div class="corner-cat-wrap">
+    <img class="corner-cat" src="images/pixel-cat.png" alt="pixel cat">
+  </div>
+</div>
+
+<script>
+  function exploreRandom() {
+    const hint = document.querySelector('.bottom-hint');
+    if (hint.classList.contains('spinning')) return;
+    hint.classList.add('spinning');
+    const pages = ['visuals.html', 'imagery.html', 'about.html', 'timeline.html'];
+    setTimeout(() => {
+      window.location.href = pages[Math.floor(Math.random() * pages.length)];
+    }, 480);
+  }
+</script>
+</body>
+</html>
